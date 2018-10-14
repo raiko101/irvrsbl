@@ -1,0 +1,118 @@
+<header class="site-header">
+  {% unless section.settings.promotions == blank %}
+     <div class="top-bar text-center">
+       <div class="promotions">
+         {{ section.settings.promotions | escape }}
+       </div>
+     </div>
+  {% endunless %}
+  <div class="bottom-bar">
+    <div class="bottom-bar__wrapper">
+      <div class="bottom-bar__left"> 
+        {% if template.name == 'index' %}
+          <button id="ToggleMobileMenu" class="mobile-nav mobile-menu-icon small--show" aria-haspopup="true" aria-owns="SiteNav">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="icon__fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+          </button>
+          <nav class="bottom-bar__nav small--hide">
+            <ul class="home-nav">
+              <li class="#">
+                  <a href="/collections/all" class="nav-disabled">{{ 'layout.navigation.home_main' | t }}</a>
+                  {% include 'home-push-nav' %} 
+              </li>
+              {% if settings.menu_main_bottom and linklists[settings.menu_main_bottom].links[0] %}
+                {% for link in linklists[settings.menu_main_bottom].links %}
+                    <li class="small--hide"><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              {% endif %}
+            </ul> 
+          </nav>
+        {% else %}
+            <button id="ToggleMobileMenu" class="mobile-nav mobile-menu-icon small--show" aria-haspopup="true" aria-owns="SiteNav">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="icon__fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+            </button>
+            <ul class="list--nav top-nav__left small--hide">
+              {% if settings.menu_main_bottom and linklists[settings.menu_main_bottom].links[0] %}
+                {% for link in linklists[settings.menu_main_bottom].links %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              {% endif %}
+            </ul>
+          {% endif %}
+      </div>
+      {% if section.settings.logo %}
+        <div class="bottom-bar__middle">
+          <a href="/" itemprop="url" class="logo">
+              <img id="HeaderLogo"
+                   src="{{ section.settings.logo | img_url: 'large' }}"
+                   data-src="{{ img_url }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.logo.alt | default: shop.name }}"
+                   itemprop="logo">
+          </a>
+        </div>
+      {% endif %}
+      <div class="bottom-bar__right">
+        {% if template.name != 'index' %}
+          {% include 'currency-picker' %}
+        {% endif %}
+        <div class="bottom-bar__search">
+          <a href="#" class="search-link">
+            {% include 'icon-search' %}
+            <span class="small--hide">{{ 'general.search.title' | t }}</span></a>
+          <form action="/search" method="get" class="search-bar" role="search">
+            {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+            <input type="search" name="q" class="search-bar__input " value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+          </form>
+        </div>
+        <a href="/cart" class="site-header__cart">
+          {% include 'icon-cart' %}
+          <span class="small--hide">
+            {{ 'layout.cart.title' | t }}
+            (<span id="CartCount">{{ cart.item_count }}</span>)
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Custom logo width (in pixels)",
+        "default": "150"
+      },
+      {
+        "type": "header",
+        "content": "Promotions"
+      },
+      {
+        "type": "textarea",
+        "id": "promotions",
+        "label": "Text",
+        "info": "Use basic HTML to format text"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,71 @@
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'medium-up--one-third small--one-half' %}
+{% endunless %}
+{% unless image_size %}
+  {% assign image_size = 'large' %}
+{% endunless %}
+
+{% assign alt = collection.title | escape %}
+{% capture title %}{{ 'collections.general.link_title' | t: title: alt }}{% endcapture %}
+
+<div class="collection grid__item {{ grid_item_width }}" role="listitem">
+  {% if collection != empty %}
+    <a href="{{ collection.url }}" title="{{ title }}" >
+      {% if collection.image %}
+        {%- assign img_url = collection.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- capture wrapper_id -%}ArticleImageWrapper--{{ collection.image.id }}{%- endcapture -%}
+        {%- capture img_id -%}ArticleImage--{{ collection.image.id }}{%- endcapture -%}
+        {% include 'image-style' with image: collection.image, width: 340, height: 480, small_style: false, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="{{ wrapper_id }}" class="supports-js collection__image-wrapper">
+          <div style="padding-top:{{ 1 | divided_by: collection.image.aspect_ratio | times: 100}}%;">
+            <img id="{{ img_id }}"
+                 class="collection__image lazyload"
+                 src="{{ collection.image | img_url: '200x200' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ collection.image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ alt }}">
+          </div>
+        </div>
+
+        <noscript>
+          <img class="collection__image-wrapper" src="{{ collection | img_url: 'large' }}" alt="{{ alt }}">
+        </noscript>
+      {% elsif collection.products.first.featured_image %}
+        {%- assign img_url = collection.products.first.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- capture wrapper_id -%}ArticleImageWrapper--{{ collection.products.first.featured_image.id }}{%- endcapture -%}
+        {%- capture img_id -%}ArticleImage--{{ collection.products.first.featured_image.id }}{%- endcapture -%}
+        {% include 'image-style' with image: collection.products.first.featured_image, width: 340, height: 480, small_style: false, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="{{ wrapper_id }}" class="supports-js collection__image-wrapper">
+          <div style="padding-top:{{ 1 | divided_by: collection.products.first.featured_image.aspect_ratio | times: 100}}%;">
+            <img id="{{ img_id }}"
+                 class="collection__image lazyload"
+                 src="{{ collection.products.first.featured_image | img_url: '200x200' }}"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ collection.products.first.featured_image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ alt }}">
+          </div>
+        </div>
+
+        <noscript>
+          <img class="collection__image-wrapper" src="{{ collection.products.first | img_url: 'large' }}" alt="{{ alt }}">
+        </noscript>
+      {% else %}
+        <img class="collection__image-wrapper" src="{{ collection.products.first | img_url: 'large' }}" alt="{{ alt }}">
+      {% endif %}
+    </a>
+
+    <div class="collection__title text-center">
+      <a href="{{ collection.url }}" title="{{ title }}" >{{ collection.title }}</a>
+    </div>
+  {% else %}
+    <a href="/admin/collections" class="grid__image">
+      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+    </a>
+    <div class="collection__title text-center"><a href="/admin/collections">{{ 'homepage.onboarding.collection_title' | t }}</a></div>
+  {% endif %}
+</div>

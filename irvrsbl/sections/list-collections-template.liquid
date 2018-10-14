@@ -1,0 +1,180 @@
+{% comment %}
+  This page represents the /collections and /products pages.
+{% endcomment %}
+
+{% assign collection_count = 0 %}
+{% assign isEmpty = true %}
+
+{% comment %}
+  Count how many collections we have to show
+{% endcomment %}
+{% for collection in collections %}
+  {% unless collection.handle == 'frontpage' %}
+    {% assign collection_count = collection_count | plus: 1 %}
+  {% endunless %}
+{% endfor %}
+
+{% if collection_count > 0 %}
+  {% assign isEmpty = false %}
+{% endif %}
+
+{% case section.settings.grid %}
+  {% when '2' %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+    {%- assign image_size = '470x' -%}
+  {% when '3' %}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+    {%- assign image_size = '305x' -%}
+  {% when '4' %}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+    {%- assign image_size = '220x' -%}
+  {% when '5' %}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+    {%- assign image_size = '175x' -%}
+{% endcase %}
+
+<h1>{{ page_title }}</h1>
+
+<div class="grid grid--uniform" role="list">
+  {% if section.settings.display_type == 'all' %}
+    {% if isEmpty %}
+      {% comment %}
+        Add default collections to help with onboarding
+      {% endcomment %}
+      <div class="grid__item">
+        <div class="grid grid--uniform helper-content">
+          {% assign collection_index = 1 %}
+          {% for i in (1..6) %}
+            <div class="grid__item small--one-half medium-up--one-third text-center">
+              <a href="/admin/collections" class="grid__image">
+                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              </a>
+              <div class="collection__title text-center"><a href="/admin/collections">{{ 'homepage.onboarding.collection_title' | t }}</a></div>
+            </div>
+            {% assign collection_index = collection_index | plus: 1 %}
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      {% case section.settings.sort %}
+        {% when 'products_high' or 'products_low' %}
+          {%- assign collections = collections | sort: 'all_products_count' -%}
+        {% when 'date' or 'date_reversed' %}
+          {%- assign collections = collections | sort: 'published_at' -%}
+      {% endcase %}
+      {% if section.settings.sort == 'products_low' or section.settings.sort == 'date' or section.settings.sort == 'alphabetical' %}
+        {% for collection in collections %}
+          {% include 'collection-grid-item', collection_image_size: image_size %}
+        {% endfor %}
+      {% else %}
+        {% for collection in collections reversed %}
+          {% include 'collection-grid-item', collection_image_size: image_size %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  {% else %}
+    {% for block in section.blocks %}
+      {%- assign collection = collections[block.settings.collection] -%}
+      {% include 'collection-grid-item', collection_image_size: image_size %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Collections list page",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections."
+      },
+      {
+        "type": "radio",
+        "id": "display_type",
+        "label": "Select collections to show",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All"
+          },
+          {
+            "value": "selected",
+            "label": "Selected"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "sort",
+        "label": "Sort collections by:",
+        "info": "Sorting only applies when 'All' is selected",
+        "default": "alphabetical",
+        "options": [
+          {
+            "value": "products_high",
+            "label": "Product count, high to low"
+          },
+          {
+            "value": "products_low",
+            "label": "Product count, low to high"
+          },
+          {
+            "value": "alphabetical",
+            "label": "Alphabetically, A-Z"
+          },
+          {
+            "value": "alphabetical_reversed",
+            "label": "Alphabetically, Z-A"
+          },
+          {
+            "value": "date",
+            "label": "Date, old to new"
+          },
+          {
+            "value": "date_reversed",
+            "label": "Date, new to old"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "grid",
+        "label": "Collections per row",
+        "default": "3",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

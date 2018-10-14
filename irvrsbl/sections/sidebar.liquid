@@ -1,0 +1,74 @@
+<div data-section-id="{{ section.id }}" data-section-type="sidebar-section">
+  <nav role="navigation">
+    <div class="site-nav sidebar-nav" role="menu">
+      {% unless template.name == 'index' %}
+        {% if settings.menu_main and linklists[settings.menu_main].links[0] %}
+          <ul class="list--nav sidebar-nav__main">
+            {% for link in linklists[settings.menu_main].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endunless %}
+
+     {% if settings.menu_category %}
+        <ul class="list--nav sidebar-nav__categories">
+          <li><a href="/collections/all">{{ 'layout.navigation.home_main_all' | t }}</a></li>
+          {% for link in linklists[settings.menu_category].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if settings.menu_designer %}
+       <ul class="list--nav sidebar-nav__vendors">
+        {% for link in linklists[settings.menu_designer].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if settings.menu_sidebar %}
+       <ul class="list--nav sidebar-nav__sidebar">
+        {% for link in linklists[settings.menu_sidebar].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <ul class="list--nav sidebar-nav__account">
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              <a href="/account" class="site-nav__link site-nav--account medium-up--hide">{{ 'layout.customer.account' | t }}</a>
+            </li>
+            <li>
+              <a href="/account/logout" class="site-nav__link site-nav--account medium-up--hide">{{ 'layout.customer.log_out' | t }}</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="/account/login" class="site-nav__link site-nav--account medium-up--hide">{{ 'layout.customer.log_in' | t }}</a>
+            </li>
+            <li>
+              <a href="/account/register" class="site-nav__link site-nav--account medium-up--hide">{{ 'layout.customer.create_account' | t }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      </ul>
+
+    </div>
+  </nav>
+</div>
+
+{% schema %}
+  {
+    "name": "Sidebar",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "Menu",
+        "default": "main-menu"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,64 @@
+<ul class="top-nav">
+  {% if settings.menu_main and linklists[settings.menu_main].links[0] %}
+    {% for link in linklists[settings.menu_main].links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+  {% endif %}
+  
+  {% if settings.menu_category %}
+    <li class="#">
+      <a href="#" class="nav-disabled parent">
+        {{ 'layout.navigation.product_type' | t }}
+        {% include 'icon-arrow-right' %} 
+      </a>
+       <ul>
+        <li class="small--show nav-back">
+          <a href="#" class="btn-back">{% include 'icon-arrow-right' %}Back</a>
+        </li>
+        <li><a href="/collections/all">{{ 'layout.navigation.home_main_all' | t }}</a></li>
+        {% for link in linklists[settings.menu_category].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+
+  {% if settings.menu_designer %}
+    <li class="#">
+      <a href="#" class="nav-disabled parent level-1">
+        {{ 'layout.navigation.product_vendor' | t }} 
+        {% include 'icon-arrow-right' %} 
+      </a>
+      <ul>
+        <li class="large--hide small--show nav-back">
+          <a href="#" class="btn-back">{% include 'icon-arrow-right' %} Back</a>
+        </li>
+        {% for link in linklists[settings.menu_designer].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+
+  {% if settings.menu_size and linklists[settings.menu_size].links[0] %}
+    <li class="#">
+      <a href="#" class="nav-disabled parent level-1">
+        {{ 'layout.navigation.product_size' | t }} 
+        {% include 'icon-arrow-right' %} 
+      </a>
+      <ul>
+        <li class="large--hide small--show nav-back">
+          <a href="#" class="btn-back">{% include 'icon-arrow-right' %} Back</a>
+        </li>
+        {% for link in linklists[settings.menu_size].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+  {% if settings.menu_main_bottom and linklists[settings.menu_main_bottom].links[0] %}
+    {% for link in linklists[settings.menu_main_bottom].links %}
+        <li class="hidden small--show"><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+  {% endif %}
+</ul> 

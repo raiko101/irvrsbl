@@ -1,0 +1,177 @@
+x{
+  "current": {
+    "color_body_bg": "#ffffff",
+    "color_body_text": "#000000",
+    "color_primary_color": "#000000",
+    "color_primary_button_text": "#ffffff",
+    "color_secondary_button_outline": "#000000",
+    "color_secondary_button_text_hover": "#ffffff",
+    "color_sale_badge": "#000000",
+    "color_borders": "#eceff1",
+    "color_form": "#ffffff",
+    "type_header_family": "Lato, Arial, 'Helvetica Neue', Helvetica, sans-serif",
+    "type_header_base_size": "20px",
+    "type_base_family": "Lato, Arial, 'Helvetica Neue', Helvetica, sans-serif",
+    "type_base_size": "14px",
+    "promotion_base_size": "10px",
+    "type_button_base_size": "12px",
+    "type_navigation_base_size": "12px",
+    "type_footer_navigation_base_size": "10px",
+    "show_breadcrumb_nav": false,
+    "menu_main": "main-menu",
+    "menu_category": "by-category",
+    "menu_designer": "by-designer",
+    "menu_sidebar": "sidebar",
+    "menu_size": "",
+    "menu_main_bottom": "main-menu-bottom",
+    "popup_count": "5000",
+    "social_facebook_link": "https:\/\/www.facebook.com\/irvrsbl",
+    "social_twitter_link": "https:\/\/twitter.com\/irvrsbl",
+    "social_pinterest_link": "https:\/\/www.pinterest.com\/irvrsbl",
+    "social_instagram_link": "https:\/\/instagram.com\/irvrsbl",
+    "social_snapchat_link": "",
+    "social_google_plus_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "social_fancy_link": "",
+    "main_blog": "",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "favicon": "shopify:\/\/shop_images\/favicon_1e99945e-616e-4172-8cf8-e4cf608bc100.jpg",
+    "show_multiple_currencies": true,
+    "currency_format": "money_with_currency_format",
+    "supported_currencies": "INR GBP CAD USD AUD EUR JPY",
+    "default_currency": "AUD",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Logo_2_263f77e4-5332-4a9f-b15f-e59ceced46d2.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Lato",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#1f93c7",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#ff6d6d",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Logo_2.png",
+          "logo_max_width": "",
+          "promotions": "Free shipping on all orders over $500.  Use code FREESHIP"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_menu": "footer"
+        }
+      },
+      "1499578923214": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 1",
+          "banner": "shopify:\/\/shop_images\/5.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/image_1.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      },
+      "1499578958303": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 2",
+          "banner": "shopify:\/\/shop_images\/1_0d67c9b2-5d62-40f7-87f3-84726c65f699.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/web1.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      },
+      "1499578993840": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 3",
+          "banner": "shopify:\/\/shop_images\/3.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/web2.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      },
+      "1499579029504": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 4",
+          "banner": "shopify:\/\/shop_images\/10.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/web3.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      },
+      "sidebar": {
+        "type": "sidebar",
+        "settings": {
+          "main_menu_link_list": "main-menu"
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "vendor_show": true,
+          "collection_sort_enable": false,
+          "collection_tag_enable": false
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "display_type": "selected",
+          "sort": "alphabetical",
+          "grid": "3"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "cart_enable_ajax": true,
+          "product_quantity_enable": false,
+          "vendor_show": true,
+          "social_sharing_products": true,
+          "product_description_position": "right",
+          "show_extra_tab": false,
+          "extra_tab_content": "",
+          "product_image_zoom_type": "lightbox",
+          "contact": "Questions? <a href=\"\/pages\/contact\">Contact us.<\/a>",
+          "sold_out": "Too late.  Once it's gone it's gone forever.  Vintage is one of a kind.  <a href=\"#\" class=\"newsletter-btn\">Stay in touch<\/a> to make sure you never miss out."
+        }
+      },
+      "1499655310986": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 5",
+          "banner": "shopify:\/\/shop_images\/7.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/web6.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      },
+      "1499655480426": {
+        "type": "featured-banner",
+        "settings": {
+          "title": "Homepage Background 6",
+          "banner": "shopify:\/\/shop_images\/12.jpg",
+          "banner_mobile": "shopify:\/\/shop_images\/web5.jpg",
+          "banner_url": "shopify:\/\/collections\/all"
+        }
+      }
+    },
+    "content_for_index": [
+      "1499578923214",
+      "1499578958303",
+      "1499578993840",
+      "1499579029504",
+      "1499655310986",
+      "1499655480426"
+    ]
+  }
+}

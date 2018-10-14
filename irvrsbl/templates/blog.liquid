@@ -1,0 +1,19 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 1000 %}
+
+<ul id="waterfall" class="articles">
+  {% for article in blog.articles %}
+    {% if article.image %}
+      <li class="article">
+        <div class="article-wrapper">
+          {{ article | img_url: '600x600' | img_tag: article.title }}
+          <div class="article-text">
+            {{ article.title }}
+          </div>
+        </div>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+{% endpaginate %}

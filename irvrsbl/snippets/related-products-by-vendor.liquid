@@ -1,0 +1,23 @@
+{% assign vendor = product.vendor %}
+{% assign handle = product.handle %}
+{% assign counter = '' %}
+
+<section class="related-products">
+	{% assign current_product = product %}
+	{% assign current_product_found = false %}
+
+	{% for product in collections.all.products %}
+	  	{% if vendor == product.vendor and counter.size < 3 and handle != product.handle %}
+		  {% capture temp %}{{ counter }}*{% endcapture %}
+		  {% assign counter = temp %}
+		  {% if counter == 1 %}
+		  	<h1 class="section-header__title">{{ 'products.general.related_products_title' | t }}</h1>
+			<div class="grid grid--uniform">
+		  {% endif %}
+		  {% include 'product-grid-item' %}
+		  {% if counter == 3 %}
+		  	</div>
+		  {% endif %}
+			{% endif %}	
+	{% endfor %}
+</section>

@@ -1,0 +1,26 @@
+<div class="newsletter">
+  <div class="newsletter_popup">
+    <a href="#" class="newsletter_close">
+      {% include 'icon-close' %}
+    </a>
+    <h1 class="site-footer__section-title">{{ 'general.newsletter_form.newsletter_heading' | t }}</h1>
+    <div class="site-footer__newsletter-label">{{ 'general.newsletter_form.newsletter_label' | t }}</div>
+      <div class="success-msg">{{ 'general.newsletter_form.confirmation' | t }}</div>
+      <div class="error-msg"></div>
+      <div class="form-content">
+        <form action="//irvrsbl.us12.list-manage.com/subscribe/post?u=9bb6507122850eb8bfb3a5a71&amp;id=f7d262010d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div class="input-group">
+            <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="EMAIL" id="NewsletterEmail" class="input-group__field site-footer__newsletter-input" autocorrect="off" autocapitalize="off">
+            <div class="input-group__btn">
+              <button type="submit" class="btn" id="Subscribe">
+                <span {% if has_page_content %}class="medium-up--hide"{% endif %}>{{ 'general.newsletter_form.submit' | t }}</span>
+                {% if has_page_content %}
+                  <span class="small--hide">{% include 'icon-arrow-right' %}</span>
+                {% endif %}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
